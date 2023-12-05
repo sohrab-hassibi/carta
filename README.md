@@ -2,7 +2,7 @@
 
 ## Overview
 
-This challenge solution is implemented using the [`Express Node.js web application framework`](https://expressjs.com/).
+This challenge solution is implemented using the [Express Node.js web application framework](https://expressjs.com/).
 
 ## Instructions to compile
 
