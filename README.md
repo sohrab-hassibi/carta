@@ -25,7 +25,7 @@ and finally:
 $ node src/app.js
 ```
 
-## Searh API endpoint
+## Search API endpoint
 
 There is one API endpoint implemented for searching courses
 
@@ -42,6 +42,7 @@ There is one API endpoint implemented for searching courses
 |    `type` | optional |   string   | Choice of search algorithm. Options are `lunr` (default) or `naive`. The former uses the node library [`lunr`](https://github.com/olivernn/lunr.js) while the latter is a native implementation described later on. |
 
 **Example**
+
 **_Request_**
 
 ```
