@@ -25,6 +25,30 @@ and finally:
 $ node src/app.js
 ```
 
+## Searh API endpoint
+
+There is one API endpoint implemented for searching courses
+
+### POST
+
+`<root URL>`/search
+
+The application is hosted on AWS at URL:
+
+```
+http://ec2-18-116-82-234.us-east-2.compute.amazonaws.com:8080/search
+```
+
+```
+curl --location 'http://ec2-18-116-82-234.us-east-2.compute.amazonaws.com:8080/search' \
+--header 'Content-Type: application/json' \
+--data '{
+    "phrase":"winter",
+    "maxHits": 3,
+    "type": "naive"
+}'
+```
+
 You are writing a web API for CourseTime, the next iteration of course exploration at Drofnats Wizarding University, and one important feature is searching for courses. You're going to write the API to search for courses!
 
 The API should be called over an HTTP request. It should return JSON representing an ordered list of search results. The exact schema is left to your discretion; you are free (and encouraged) to borrow the input data format in whole or part.
