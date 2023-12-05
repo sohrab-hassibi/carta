@@ -41,18 +41,84 @@ There is one API endpoint implemented for searching courses
 | `maxHits` | optional |    int     | The maximum number of matched courses returned per input search string `phrase`. <br/><br/> Default is `100`.                                                                                                       |
 |    `type` | optional |   string   | Choice of search algorithm. Options are `lunr` (default) or `naive`. The former uses the node library [`lunr`](https://github.com/olivernn/lunr.js) while the latter is a native implementation described later on. |
 
-**Response**
+**Example**
+**_Request_**
 
 ```
-// Customer has no subscription
 {
-    "success": true,
-    "data": {
-        "subscriptions": []
-    }
+    "phrase":"potion",
+    "maxHits": 3,
+    "type": "naive"
 }
+```
 
+**_Response_**
 
+```
+{
+    "input": {
+        "phrase": "potion",
+        "maxHits": 3,
+        "type": "naive"
+    },
+    "output": [
+        {
+            "score": 0.2727272727272727,
+            "phraseStemmed": "potion",
+            "id": 7,
+            "title": "Potion Tasting",
+            "description": "Sampling a variety of delicious and elegant potions.",
+            "course_code": "POTIONS 60D",
+            "requirements": [],
+            "units": [
+                1,
+                1
+            ],
+            "quarters": [
+                "spring"
+            ]
+        },
+        {
+            "score": 0.1111111111111111,
+            "phraseStemmed": "potion",
+            "id": 4,
+            "title": "Advanced Potioncrafting",
+            "description": "Brewing, mixing, and stirring effective and elegant magical concoctions beyond the basics. Prerequisites: POTIONS 101.",
+            "course_code": "POTIONS 201",
+            "requirements": [
+                "SpiritMixingAnalysis"
+            ],
+            "units": [
+                4,
+                4
+            ],
+            "quarters": [
+                "winter"
+            ]
+        },
+        {
+            "score": 0.0625,
+            "phraseStemmed": "potion",
+            "id": 3,
+            "title": "Intro to Potioncrafting",
+            "description": "Brewing, mixing, and stirring effective magical concoctions. No prerequisites.",
+            "course_code": "POTIONS 101",
+            "requirements": [
+                "SpiritMixingAnalysis"
+            ],
+            "units": [
+                4,
+                4
+            ],
+            "quarters": [
+                "autumn",
+                "winter",
+                "spring"
+            ]
+        }
+    ]
+}
+```
 
 If you run `node src/app.js` locally you can access the API using:
 
@@ -157,4 +223,7 @@ If you don't finish in the projected time range, it's okay to stop and submit wh
 Deliverables should be submitted as specified in the [eng-challenge README](https://github.com/Stanford-Carta/eng-challenge/blob/main/README.md).
 
 Good luck, thank you for considering joining Carta, and we hope to hear from you soon!
+
+```
+
 ```
