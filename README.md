@@ -31,12 +31,18 @@ There is one API endpoint implemented for searching courses
 
 ### POST
 
-`<root URL>`/search
+`<root URL>:8080`/search
 
-The application is hosted on AWS at URL:
+If you run `node src/app.js` locally you can access the API locally using:
 
 ```
-http://ec2-18-116-82-234.us-east-2.compute.amazonaws.com:8080/search
+POST http://localhost::8080/search
+```
+
+The application is also hosted on AWS, so that the API is accessible via:
+
+```
+POST http://ec2-18-116-82-234.us-east-2.compute.amazonaws.com:8080/search
 ```
 
 ```
