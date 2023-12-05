@@ -87,12 +87,7 @@ module.exports.searchNaive = function (input) {
     const courseArray = idxNaive[i].split(" ");
     for (var k = 0; k < courseArray.length; k++) {
       for (var j = 0; j < phraseArray.length; j++) {
-        /*
-        const score = natural.JaroWinklerDistance(
-          phraseArray[j],
-          courseArray[k]
-        ); // if phraseArray[j] matches courseArray[k]
-        */
+
         const score = Number(phraseArray[j] == courseArray[k]);
         scores[i] += score;
       }
