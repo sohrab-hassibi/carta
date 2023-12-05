@@ -35,11 +35,11 @@ There is one API endpoint implemented for searching courses
 
 **Body raw JSON**
 
-|      Name | Required |  Type  | Description                                                                                                                                                                                                         |
-| --------: | :------: | :----: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|  `phrase` | required | string | The user input search string for courses.                                                                                                                                                                           |
-| `maxHits` | optional |  int   | The maximum number of matched courses returned per input search string `phrase`. <br/><br/> Default is `100`.                                                                                                       |
-|    `type` | optional | string | Choice of search algorithm. Options are `lunr` (default) or `naive`. The former uses the node library [`lunr`](https://github.com/olivernn/lunr.js) while the latter is a native implementation described later on. |
+|       Key | Required | Value type | Description                                                                                                                                                                                                         |
+| --------: | :------: | :--------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|  `phrase` | required |   string   | The user input search string for courses.                                                                                                                                                                           |
+| `maxHits` | optional |    int     | The maximum number of matched courses returned per input search string `phrase`. <br/><br/> Default is `100`.                                                                                                       |
+|    `type` | optional |   string   | Choice of search algorithm. Options are `lunr` (default) or `naive`. The former uses the node library [`lunr`](https://github.com/olivernn/lunr.js) while the latter is a native implementation described later on. |
 
 **Response**
 
