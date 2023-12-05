@@ -33,26 +33,52 @@ There is one API endpoint implemented for searching courses
 
 `<root URL>:8080`/search
 
-If you run `node src/app.js` locally you can access the API locally using:
+**Parameters**
+
+|              Name | Required |  Type  | Description                                                                                                                                                                                       |
+| ----------------: | :------: | :----: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|         `product` | required | string | The product for which to perform the action. <br/><br/> Supported values: `publish` or `analyze`.                                                                                                 |
+| `organization_id` | optional | string | The organization ID for which to perform the action. <br/><br/> Default is `null`. <br/><br/> If passed, we will check if the user is part of that organization before returning any information. |
+
+**Response**
 
 ```
+// Customer has no subscription
+{
+    "success": true,
+    "data": {
+        "subscriptions": []
+    }
+}
+
+
+
+If you run `node src/app.js` locally you can access the API using:
+
+```
+
 POST http://localhost::8080/search
+
 ```
 
 The application is also hosted on AWS, so that the API is accessible via:
 
 ```
+
 POST http://ec2-18-116-82-234.us-east-2.compute.amazonaws.com:8080/search
+
 ```
 
 ```
+
 curl --location 'http://ec2-18-116-82-234.us-east-2.compute.amazonaws.com:8080/search' \
 --header 'Content-Type: application/json' \
 --data '{
-    "phrase":"winter",
-    "maxHits": 3,
-    "type": "naive"
+"phrase":"winter",
+"maxHits": 3,
+"type": "naive"
 }'
+
 ```
 
 You are writing a web API for CourseTime, the next iteration of course exploration at Drofnats Wizarding University, and one important feature is searching for courses. You're going to write the API to search for courses!
@@ -130,3 +156,4 @@ If you don't finish in the projected time range, it's okay to stop and submit wh
 Deliverables should be submitted as specified in the [eng-challenge README](https://github.com/Stanford-Carta/eng-challenge/blob/main/README.md).
 
 Good luck, thank you for considering joining Carta, and we hope to hear from you soon!
+```
