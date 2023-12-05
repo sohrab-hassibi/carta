@@ -153,7 +153,8 @@ I've implemented the course search API in two ways. The first method is based on
 
 ### Lunr-based implementation
 
-Lunr provides out-of-the-box APIs for indexing searchable data (courses) and search.  In my code, the courses are indexed as follows:
+Lunr provides out-of-the-box APIs for indexing searchable data (courses) and search. In my code, the courses are indexed as follows:
+
 ```
 // index the courses wit title, descriotion, course_code and quarters meta data
 var idxLunr = lunr(function () {
@@ -174,13 +175,23 @@ var idxLunr = lunr(function () {
   }
 });
 ```
+
 The search is then carried out using:
+
 ```
 const rawHits = idxLunr.search(phrase);
 ```
-My code then takes the `rawHits` and returns the top hits as the response while inserting the score for each course (limited to `maxHits` as specified in the input JSON of the request).
+
+My code then takes the `rawHits` above and returns the top hits as the response while inserting the score for each course (limited to `maxHits` as specified in the input JSON of the request).
 
 ### Native implementation
+
+I've also implemented my own search functionality as I thought perhaps using [Lunr](https://www.npmjs.com/package/lunr) was kind of cheating :-)
+
+My implementation indexes all searchable data (courses) in the following way:
+
+- sdsad
+- asdsada
 
 You are writing a web API for CourseTime, the next iteration of course exploration at Drofnats Wizarding University, and one important feature is searching for courses. You're going to write the API to search for courses!
 
