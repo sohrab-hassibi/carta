@@ -27,7 +27,7 @@ $ node src/app.js
 
 ## Search API endpoint
 
-There is one API endpoint implemented for searching courses
+There is one API endpoint implemented for searching courses.
 
 ### POST
 
@@ -38,10 +38,10 @@ There is one API endpoint implemented for searching courses
 |       Key | Required | Value type | Description                                                                                                                                                                                                        |
 | --------: | :------: | :--------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 |  `phrase` | required |   string   | The user input search string for courses.                                                                                                                                                                          |
-| `maxHits` | optional |    int     | The maximum number of matched courses returned per input search string `phrase`. <br/><br/> Default is `100`.                                                                                                      |
+| `maxHits` | optional |    int     | The maximum number of matched courses returned per input search string `phrase`. <br/><br/> Default value is `100`.                                                                                                      |
 |    `type` | optional |   string   | Choice of search algorithm. Options are `lunr` (default) or `naive`. The former uses the node library [`lunr`](https://www.npmjs.com/package/lunr) while the latter is a native implementation described later on. |
 
-**Example**
+**EXAMPLE**
 
 **_cURL_**
 
@@ -182,11 +182,11 @@ The search is then carried out using:
 const rawHits = idxLunr.search(phrase);
 ```
 
-My code then takes the `rawHits` above and returns the top hits as the response while inserting the score for each course (limited to `maxHits` as specified in the input JSON of the request).
+My code then takes the `rawHits` above and returns the top hits as the response while inserting the score for each course (limited to `maxHits` as specified in the input JSON of the request). I thought that by implementing an open-source search library, I'd be able to construct an indexing algorithm with the highest accuracy.
 
 ### Native implementation
 
-I've also implemented my own search functionality as I thought perhaps using [Lunr](https://www.npmjs.com/package/lunr) was kind of cheating :-)
+I've also implemented my own search functionality as I thought perhaps only using [Lunr](https://www.npmjs.com/package/lunr) was kind of cheating :-)
 
 My implementation indexes all searchable data (courses) in the following way:
 
@@ -197,7 +197,7 @@ My implementation indexes all searchable data (courses) in the following way:
 
 The result strings for all courses is saved in a JSON array.
 
-Now when the search phrase comes in, we do the same transformations to that search phrase (stop word removal, tokenization, and stemming). Then we do a double loop to see if there's a perfect match or not, and for every perfect match we increase the hit score for the courresponding course by `1`. At the end, we normalize the score by the length of the course string so that in case of ties we favor courses with less string length. See snippet below:
+Now when the search phrase comes in, we do the same transformations to that search phrase (stop word removal, tokenization, and stemming). Then I coded a double loop to see if there's a perfect match or not, and for every perfect match we increase the hit score for the courresponding course by `1`. At the end, we normalize the score by the length of the course string so that in case of ties we favor courses with less string length. See snippet below:
 
 ```
   const [phraseArray, phraseString] = getCleanStringForSearch(input.phrase);
@@ -215,4 +215,4 @@ Now when the search phrase comes in, we do the same transformations to that sear
   }
 ```
 
-Finally, at the end we sort/rank the courses based on the scores and return the top `maxHits` courses along with the score values.
+Finally, at the end we sort/rank the courses based on the scores and return the top `maxHits` courses along with the score values. Creating my own naive implementation gave me a holistic comparison with Lunr, and the tradeoffs (both in time and in accuracy) between creating my own algorithm versus using one already available.
