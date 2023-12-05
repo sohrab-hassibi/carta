@@ -1,4 +1,4 @@
-# Backend Engineering Challenge Solution by [`Sohrab Hassibi`] (mailto:sohrabh@stanford.edu)
+# Backend Engineering Challenge Solution by [Sohrab Hassibi](mailto:sohrabh@stanford.edu)
 
 ## Overview
 
