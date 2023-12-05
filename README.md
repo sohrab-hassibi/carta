@@ -190,8 +190,11 @@ I've also implemented my own search functionality as I thought perhaps using [Lu
 
 My implementation indexes all searchable data (courses) in the following way:
 
-- sdsad
-- asdsada
+- Flatten every course JSON as one big string after removing all keys (`title`, `description`, etc.)
+- Remove all stop words from string using [`stopword`](https://www.npmjs.com/package/stopword)
+- Tokenize string using [`natural.WordTokenizer()`](https://www.npmjs.com/package/natural)
+- Stem every word in the string using [`natural.PorterStemmer`](https://www.npmjs.com/package/natural)
+  The result strings for all courses is saved in a JSON array.
 
 You are writing a web API for CourseTime, the next iteration of course exploration at Drofnats Wizarding University, and one important feature is searching for courses. You're going to write the API to search for courses!
 
