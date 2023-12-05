@@ -35,10 +35,11 @@ There is one API endpoint implemented for searching courses
 
 **Parameters**
 
-|              Name | Required |  Type  | Description                                                                                                                                                                                       |
-| ----------------: | :------: | :----: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|         `product` | required | string | The product for which to perform the action. <br/><br/> Supported values: `publish` or `analyze`.                                                                                                 |
-| `organization_id` | optional | string | The organization ID for which to perform the action. <br/><br/> Default is `null`. <br/><br/> If passed, we will check if the user is part of that organization before returning any information. |
+|      Name | Required |  Type  | Description                                                                                                                                                                                                         |
+| --------: | :------: | :----: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|  `phrase` | required | string | The user input search string for courses.                                                                                                                                                                           |
+| `maxHits` | optional |  int   | The maximum number of matched courses returned per input search string `phrase`. <br/><br/> Default is `100`.                                                                                                       |
+|    `type` | optional | string | Choice of search algorithm. Options are `lunr` (default) or `naive`. The former uses the node library [`lunr`](https://github.com/olivernn/lunr.js) while the latter is a native implementation described later on. |
 
 **Response**
 
