@@ -31,18 +31,18 @@ There is one API endpoint implemented for searching courses
 
 ### POST
 
-`<root URL>:8080`/search
+`<Base URL>:8080`/search
 
 **Body raw JSON**
 
-|       Key | Required | Value type | Description                                                                                                                                                                                                         |
-| --------: | :------: | :--------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|  `phrase` | required |   string   | The user input search string for courses.                                                                                                                                                                           |
-| `maxHits` | optional |    int     | The maximum number of matched courses returned per input search string `phrase`. <br/><br/> Default is `100`.                                                                                                       |
-|    `type` | optional |   string   | Choice of search algorithm. Options are `lunr` (default) or `naive`. The former uses the node library [`lunr`](https://github.com/olivernn/lunr.js) while the latter is a native implementation described later on. |
+|       Key | Required | Value type | Description                                                                                                                                                                                                        |
+| --------: | :------: | :--------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|  `phrase` | required |   string   | The user input search string for courses.                                                                                                                                                                          |
+| `maxHits` | optional |    int     | The maximum number of matched courses returned per input search string `phrase`. <br/><br/> Default is `100`.                                                                                                      |
+|    `type` | optional |   string   | Choice of search algorithm. Options are `lunr` (default) or `naive`. The former uses the node library [`lunr`](https://www.npmjs.com/package/lunr) while the latter is a native implementation described later on. |
 
 **Example**
- 
+
 **_cURL_**
 
 ```
@@ -54,7 +54,7 @@ curl --location 'http://ec2-18-116-82-234.us-east-2.compute.amazonaws.com:8080/s
    "type": "naive"
 }'
 ```
- 
+
 **_Request_**
 
 ```
@@ -133,6 +133,8 @@ curl --location 'http://ec2-18-116-82-234.us-east-2.compute.amazonaws.com:8080/s
 }
 ```
 
+## Hosted endpoint
+
 If you run `node src/app.js` locally you can access the API using:
 
 ```
@@ -144,22 +146,19 @@ POST http://localhost::8080/search
 The application is also hosted on AWS, so that the API is accessible via:
 
 ```
-
 POST http://ec2-18-116-82-234.us-east-2.compute.amazonaws.com:8080/search
 
 ```
 
-```
+## Description
 
-curl --location 'http://ec2-18-116-82-234.us-east-2.compute.amazonaws.com:8080/search' \
---header 'Content-Type: application/json' \
---data '{
-"phrase":"winter",
-"maxHits": 3,
-"type": "naive"
-}'
+I've implemented the course search API in two ways. The first method is based on an existing search package called [Lunr](https://www.npmjs.com/package/lunr). The second method is my own (naive) implemention. The search method is selected by specifying the `type` keyword in the input JSON of the `POST /search` request.
 
-```
+### [Lunr](https://www.npmjs.com/package/lunr)-based implementation
+
+Lunr provides out-of-the-box APIs for indexing searchable data
+
+### Native implementation
 
 You are writing a web API for CourseTime, the next iteration of course exploration at Drofnats Wizarding University, and one important feature is searching for courses. You're going to write the API to search for courses!
 
