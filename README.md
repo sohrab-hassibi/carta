@@ -138,25 +138,47 @@ curl --location 'http://ec2-18-116-82-234.us-east-2.compute.amazonaws.com:8080/s
 If you run `node src/app.js` locally you can access the API using:
 
 ```
-
 POST http://localhost::8080/search
-
 ```
 
 The application is also hosted on AWS, so that the API is accessible via:
 
 ```
 POST http://ec2-18-116-82-234.us-east-2.compute.amazonaws.com:8080/search
-
 ```
 
 ## Description
 
-I've implemented the course search API in two ways. The first method is based on an existing search package called [Lunr](https://www.npmjs.com/package/lunr). The second method is my own (naive) implemention. The search method is selected by specifying the `type` keyword in the input JSON of the `POST /search` request.
+I've implemented the course search API in two ways. The first method is based on an existing search package called [Lunr](https://www.npmjs.com/package/lunr). The second method is my own (naive) implemention. The search method is selected by specifying the `type` keyword in the input JSON of the `POST /search` request as shown earlier.
 
-### [Lunr](https://www.npmjs.com/package/lunr)-based implementation
+### Lunr-based implementation
 
-Lunr provides out-of-the-box APIs for indexing searchable data
+Lunr provides out-of-the-box APIs for indexing searchable data (courses) and search.  In my code, the courses are indexed as follows:
+```
+// index the courses wit title, descriotion, course_code and quarters meta data
+var idxLunr = lunr(function () {
+  this.field("title");
+  this.field("description");
+  this.field("course_code");
+  this.field("quarters");
+
+  for (let i = 0; i < courses.length; i++) {
+    const course = courses[i];
+    this.add({
+      title: course["title"],
+      description: course["description"],
+      course_code: course["course_code"],
+      quarters: course["quarters"],
+      id: course["id"],
+    });
+  }
+});
+```
+The search is then carried out using:
+```
+const rawHits = idxLunr.search(phrase);
+```
+My code then takes the `rawHits` and returns the top hits as the response while inserting the score for each course (limited to `maxHits` as specified in the input JSON of the request).
 
 ### Native implementation
 
